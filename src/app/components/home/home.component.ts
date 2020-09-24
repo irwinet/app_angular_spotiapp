@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   paises:any[]=[];
   nuevasCanciones:any[]=[];
+  loading:boolean;
 
   constructor(private http:HttpClient,
               private spotify:SpotifyService) { 
@@ -22,10 +23,13 @@ export class HomeComponent implements OnInit {
     //             console.log(resp);
     //           });
     
+    this.loading = true;
+
     this.spotify.getNewReleases()
                 .subscribe((data:any)=>{
                   console.log(data);
                   this.nuevasCanciones = data;
+                  this.loading = false;
                 });
   }
 
